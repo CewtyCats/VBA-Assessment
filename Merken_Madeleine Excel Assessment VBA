@@ -1,0 +1,18 @@
+Sub CreateFolder()
+    Dim rootDirectory As String
+    Dim folderToBeCreated As String
+    Dim path As String
+        rootDirectory = "/Users/madeleinemerken/Desktop/Merken_Madeleine Excel Assessment VBA"
+        folderToBeCreated = "Merken_Madeleine Excel Assessment VBA"
+        path = rootDirectory & folderToBeCreated
+            If Len(Dir(rootDirectory, vbDirectory)) = 0 Then
+                If Len(Dir(path, vbDirectory)) = 0 Then
+                VBA.MkDir (path)
+                MsgBox "Folder is created successfully"
+            Else
+                MsgBox "Folder is already existing in the root directory"
+            End If
+        Else
+            MsgBox "Root directory does not exist"
+        End If
+End Sub
