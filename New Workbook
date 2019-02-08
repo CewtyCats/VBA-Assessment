@@ -1,0 +1,21 @@
+ Sub NewWorkBookAndSheets()
+ Dim NewBook As Workbook
+ Dim n As Integer
+ Dim start As Integer
+
+ Set NewBook = Workbooks.Add
+ With NewBook
+     start = .Worksheets.Count + 1
+     If start < 11 Then
+
+     For n = start To 11
+          .Sheets.Add After:=Sheets(n - 1)
+     Next n
+     For n = 1 To 11
+        .Worksheets(n).Name = n
+     Next n
+     End If
+    .SaveAs FileName:="NewBook.xlsx"
+ End With
+
+ End Sub
