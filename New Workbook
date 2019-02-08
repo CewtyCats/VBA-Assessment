@@ -17,5 +17,43 @@
      End If
     .SaveAs FileName:="NewBook.xlsx"
  End With
+ 
+Dim wbSource As Workbook
+Dim wbTarget As Workbook
+Dim shSource As Worksheet
+Dim shTarget As Worksheet
+
+' Open workbook to copy from as readonly
+Set wbSource = Workbooks.Open(FileName:="/Users/madeleinemerken/Downloads/<Merken, Madeleine>_NCoE Candidate Excel Assessment.xlsm", ReadOnly:=True)
+
+' The data is copies to this workbook
+Set wbTarget = ThisWorkbook
+
+
+Set shSource = wbSource.Worksheets("2. Formatting")
+
+' Reference to sheet to copy to
+Set shTarget = wbTarget.Worksheets("Table")
+
+' Copy data to first column in target sheet
+shSource.Range("B3:R13").Copy Destination:=shTarget.Cells(1, 1)
+
+ActiveSheet.Name = "Table Data"
+
+ActiveWorkbook.SaveAs "/Users/madeleinemerken/Desktop/Merken_Madeleine Excel Assessment VBA/NewBook.xlsx" & Workorder & ".xlsm", xlOpenXMLWorkbookMacroEnabled
+
+ThisWorkbook.SaveAs FileName:="C:\Users\Public\Desktop\" & ThisWorkbook.Name & "_copy", _
+FileFormat:=xlOpenXMLWorkbookMacroEnabled
+
+Const Path = "/Users/madeleinemerken/Desktop/Merken_Madeleine Excel Assessment VBA/NewBook.xlsm"
+Dim FileName As String
+Dim Pos As Long
+
+Pos = InStrRev(ActiveWorkbook.Name, ".") - 1
+' If there wasn't a ".", then the file doesn't have an extension and Pos = -1
+If Pos < 0 Then Pos = Len(ActiveWorkbook.Name)
+' Now put everything together, including the file extension...
+ActiveWorkbook.SaveAs Path & Left(ActiveWorkbook.Name, Pos) & Format(Now, "yyyy-mm-dd") & Mid(ActiveWorkbook.Name, Pos + 1)
+
 
  End Sub
